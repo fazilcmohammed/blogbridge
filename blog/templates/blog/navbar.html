@@ -1,0 +1,58 @@
+{% load static %}
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light shadow-sm">
+    <!-- Brand logo or name -->
+    <a class="navbar-brand" href="{% url 'home-page' %}">
+        BLOG<!-- Replace with your logo -->
+    </a>
+
+    <!-- Toggler for responsive navigation on mobile -->
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <!-- Navbar content -->
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <!-- Centered "Home" link, visible only for authenticated users -->
+        {% if user.is_authenticated %}
+            <ul class="navbar-nav mx-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'home-page' %}">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'new-post' %}">Create</a>
+                </li>
+            </ul>
+        {% endif %}
+
+        <!-- Right-aligned content (Welcome message, Profile dropdown, Login and Signup buttons) -->
+        <ul class="navbar-nav ml-auto">
+            {% if user.is_authenticated %}
+                <!-- Welcome message near Profile button -->
+                <li class="nav-item">
+                    <h6 class="navbar-text mr-3 ">Welcome, {{ user.username }}</h6>
+                </li>
+
+                <!-- Profile dropdown for authenticated users -->
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Profile
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="/newpost">New Post</a>
+                        <a class="dropdown-item" href="/mypost">My Posts</a>
+                        <a class="dropdown-item" href="/signout">Sign Out</a>
+                    </div>
+                </li>
+            {% else %}
+                <!-- Login and Signup buttons for unauthenticated users -->
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'login-page' %}">Login</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'signup-page' %}">Signup</a>
+                </li>
+            {% endif %}
+        </ul>
+    </div>
+</nav>

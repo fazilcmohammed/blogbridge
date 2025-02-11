@@ -1,0 +1,30 @@
+{% extends 'blog/base.html' %}
+{% block content %}
+{% load static %}
+
+<div class="container custom-container">
+    {% include "blog/navbar.html" %}
+    <br><br>
+    <div class="container custom-container" style="max-width: 1350px; ">
+        {% for post in posts %}
+        <article class="media content-section">
+
+            <div class="media-body" style="border: 1px solid black; padding: 23px; margin-bottom: 10px;">
+                <div class="article-metadata">
+                    <h5 class="text-uppercase" style="text-align:left;float:left; color: #000000;">{{ post.author }}</h5>
+                    <h6 style="text-align:right;float:right;">{{ post.date_posted|date:"F d, Y" }}</h6>
+                    <hr style="clear:both;" />
+                </div>
+
+                <!-- Make the post title a clickable link -->
+                <h3><a href="{% url 'read-post' post.id %}">{{ post.title }}</a></h3>
+
+                <p class="article-content">{{ post.content|slice:":100" }}...</p>
+                <br><br>
+            </div>
+        </article>
+        {% endfor %}
+    </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,35 @@
+{% extends 'blog/base.html' %}
+{% block content %}
+{% load static %}
+<div class="container custom-container">
+    {% include "blog/navbar.html" %}
+    <form method="post" enctype="multipart/form-data">  <!-- Added enctype for file uploads -->
+        {% csrf_token %}
+        <div class="container custom-container" style="max-width: 1250px;">
+            <br><br>
+            <h1 class="fw-bolder">Make a New Post</h1>
+            <hr><br>
+
+            <!-- Title Field -->
+            <div class="mb-3">
+                <h3><label for="exampleInputText" class="form-label">Heading/Title</label></h3>
+                <input type="text" class="form-control" id="exampleInputText" name="title" required>
+            </div>
+
+            <!-- Content Field -->
+            <div class="form-group">
+                <h3><label for="exampleFormControlTextarea3">Content</label></h3>
+                <textarea class="form-control" id="exampleFormControlTextarea3" rows="7" name="content" required></textarea>
+            </div>
+
+            <!-- Image Upload Field -->
+            <div class="mb-3">
+                <h3><label for="image" class="form-label">Upload Image (optional)</label></h3>
+                <input type="file" class="form-control" id="image" name="image">
+            </div>
+
+            <input class="btn btn-primary" type="submit" value="Submit">
+        </div>
+    </form>
+</div>
+{% endblock %}

@@ -1,0 +1,35 @@
+{% extends 'blog/base.html' %}
+
+{% block content %}
+<div class="container">
+    <h1>Edit Post</h1>
+    <form method="POST" enctype="multipart/form-data">  <!-- Make sure to add enctype for file uploads -->
+        {% csrf_token %}
+        
+        <!-- Title Field -->
+        <div class="form-group">
+            <label for="title">Title</label>
+            <input type="text" class="form-control" id="title" name="title" value="{{ post.title }}" required>
+        </div>
+        
+        <!-- Content Field -->
+        <div class="form-group">
+            <label for="content">Content</label>
+            <textarea class="form-control" id="content" name="content" rows="5" required>{{ post.content }}</textarea>
+        </div>
+
+        <!-- Image Field (If there's an existing image) -->
+        <div class="form-group">
+            <label for="image">Image (optional)</label>
+            {% if post.image %}
+                <div>
+                    <img src="{{ post.image.url }}" alt="Post Image" style="max-width: 200px; max-height: 200px;">
+                </div>
+            {% endif %}
+            <input type="file" class="form-control" id="image" name="image">
+        </div>
+
+        <button type="submit" class="btn btn-primary">Save Changes</button>
+    </form>
+</div>
+{% endblock %}

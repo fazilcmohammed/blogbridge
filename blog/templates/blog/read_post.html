@@ -1,0 +1,34 @@
+{% extends 'blog/base.html' %}
+
+{% block content %}
+<div class="container custom-container">
+    {% include "blog/navbar.html" %}
+    <div class="post-container my-5 py-4 px-4 shadow-sm rounded">
+        <!-- Post Title -->
+        <h1 class="display-4 text-center mb-4">{{ post.title }}</h1>
+
+        <!-- Optional Image -->
+        {% if post.image %}
+            <div class="post-image mb-4 text-center">
+                <img src="{{ post.image.url }}" alt="Post Image" class="img-fluid rounded shadow-sm">
+            </div>
+        {% endif %}
+
+        <!-- Metadata (Author & Date) -->
+        <div class="article-metadata d-flex justify-content-between mb-4">
+            <h3 class="text-muted">Author: <span class="font-weight-bold">{{ post.author }}</span></h3>
+            <h5 class="text-muted">{{ post.date_posted|date:"F d, Y" }}</h5>
+        </div>
+
+        <!-- Post Content -->
+        <div class="post-content mb-5">
+            <p class="lead">{{ post.content }}</p>
+        </div>
+
+        <!-- Optional: Add a "Back to Home" button -->
+        <div class="text-center">
+            <a href="{% url 'home-page' %}" class="btn btn-primary btn-lg">Back to Home</a>
+        </div>
+    </div>
+</div>
+{% endblock %}
